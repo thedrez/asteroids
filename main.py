@@ -16,6 +16,14 @@ def main():
     game_clock = pygame.time.Clock()
     dt = 0
 
+    # Create groups to manage objects
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    # add static class variable to Player class
+    # before creating any Player instances
+    Player.containers = (updatable, drawable)
+
     # Create a Player object
     player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
 
@@ -29,11 +37,12 @@ def main():
         # blanking the screen??
         screen.fill("black")
 
-        # have the player draw itself into the screen buffer
-        # first update the player's information
-        player.update(dt)
+        # user the sprite group to make an update call
+        updatable.update(dt)
+
         # lastly, draw the player
-        player.draw(screen)
+        for thing in drawable:
+            thing.draw(screen)
 
         # causes screen buffer to be drawn
         pygame.display.flip()
