@@ -1,3 +1,5 @@
+import sys
+
 # this allows us to use code from
 # the open-source pygame library
 # throughout this file
@@ -49,6 +51,13 @@ def main():
 
         # user the sprite group to make an update call
         updatable.update(dt)
+
+        # check for collisions wiht player
+        for asteroid in asteroids:
+            if asteroid.collides_with(player):
+                # then ship was hit
+                print("Game over!")
+                sys.exit()
 
         # lastly, draw the player
         for thing in drawable:
