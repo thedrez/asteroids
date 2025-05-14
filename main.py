@@ -2,9 +2,11 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+
 from constants import *
 from player import Player
-
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
     print("Starting Asteroids!")
@@ -19,13 +21,21 @@ def main():
     # Create groups to manage objects
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
 
-    # add static class variable to Player class
+    # add static class containers variable to classes
     # before creating any Player instances
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
 
     # Create a Player object
     player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
+
+    # Create AsteroidField object
+    asteroidfield = AsteroidField()
+
+    # Create Asteroid object group
 
     # Setup the Game Event Loop
     game_loop = True
