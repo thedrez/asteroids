@@ -52,10 +52,17 @@ def main():
         # blanking the screen??
         screen.fill("black")
 
-        # user the sprite group to make an update call
+        # use the sprite group to make an update call
         updatable.update(dt)
 
-        # check for collisions wiht player
+        # check for asteroid and shot collisions
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    asteroid.kill()
+                    shot.kill()
+
+        # check for collisions with player
         for asteroid in asteroids:
             if asteroid.collides_with(player):
                 # then ship was hit
