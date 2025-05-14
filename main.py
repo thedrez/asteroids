@@ -30,6 +30,9 @@ def main():
         screen.fill("black")
 
         # have the player draw itself into the screen buffer
+        # first update the player's information
+        player.update(dt)
+        # lastly, draw the player
         player.draw(screen)
 
         # causes screen buffer to be drawn
