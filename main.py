@@ -55,19 +55,17 @@ def main():
         # use the sprite group to make an update call
         updatable.update(dt)
 
-        # check for asteroid and shot collisions
-        for asteroid in asteroids:
-            for shot in shots:
-                if asteroid.collides_with(shot):
-                    asteroid.kill()
-                    shot.kill()
-
         # check for collisions with player
         for asteroid in asteroids:
             if asteroid.collides_with(player):
                 # then ship was hit
                 print("Game over!")
                 sys.exit()
+            # check for asteroid and shot collisions
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    asteroid.split()
+                    shot.kill()
 
         # lastly, draw the player
         for thing in drawable:
